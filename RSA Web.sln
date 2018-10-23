@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSA Web", "RSA Web\RSA Web.csproj", "{DB224CD3-7A63-4819-8077-2B9DB787929E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB224CD3-7A63-4819-8077-2B9DB787929E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB224CD3-7A63-4819-8077-2B9DB787929E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB224CD3-7A63-4819-8077-2B9DB787929E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB224CD3-7A63-4819-8077-2B9DB787929E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDF58141-DB3A-439A-909E-9FF0D0597919}
+	EndGlobalSection
+EndGlobal
