@@ -5,39 +5,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RSA_Web.Models;
+using RSA_Web.Interfaces;
 
 namespace RSA_Web.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly IDirection DirectionService;
+
+        public HomeController(IDirection DirectionService)
+        {
+            this.DirectionService = DirectionService;
+        }
+
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return Json(DirectionService.Directions);
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public IActionResult Index(int Size)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            DirectionService.Size = Size;
+            return Json(DirectionService.Direction);
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
