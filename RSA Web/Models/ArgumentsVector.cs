@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace RSA_Web.Models
 {
-    public class IterationModel
+    public class ArgumentsVector
     {
-
+        public List<double> X { get; set; } = new List<double>();
     }
 }

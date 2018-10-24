@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RSA Web</name>
+    </assembly>
+    <members>
+        <member name="T:RSA_Web.Services.DirectionService">
+            <summary>
+            Управление направлениями
+            </summary>
+        </member>
+        <member name="P:RSA_Web.Services.DirectionService.Directions">
+            <summary>
+            Список направлений поиска
+            </summary>
+            <value>
+            Нормально распределенные величины в диапазоне [0;1]
+            </value>
+            <remarks>
+            Расширяемое singletone множество коэффициентов для изменения шага поиска
+            </remarks>
+        </member>
+        <member name="P:RSA_Web.Services.DirectionService.Size">
+            <summary>
+            Текущий размер множества направлений
+            </summary>
+        </member>
+        <member name="M:RSA_Web.Services.DirectionService.#ctor">
+            <summary>
+            Создает пустой список, ставит текущий индекс направлений = 0
+            </summary>
+        </member>
+        <member name="P:RSA_Web.Services.DirectionService.CurrentDirection">
+            <summary>
+            Возвращает объект текущего направления
+            </summary>
+        </member>
+        <member name="M:RSA_Web.Services.DirectionService.SetNextDirection">
+            <summary>
+            Смещает указатель текущего направления на +1
+            </summary>
+        </member>
+    </members>
+</doc>

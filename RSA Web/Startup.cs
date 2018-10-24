@@ -26,7 +26,8 @@ namespace RSA_Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<IDirection, DirectionService>();
+            services.AddTransient<IServiceRSA, RSAService>();
+            services.AddTransient<IServiceDirection, DirectionService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -37,7 +38,7 @@ namespace RSA_Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/RSA/Error");
             }
 
             app.UseStaticFiles();
@@ -46,7 +47,7 @@ namespace RSA_Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=RSA}/{action=Init}/{id?}");
             });
         }
     }

@@ -6,11 +6,12 @@ using RSA_Web.Models;
 
 namespace RSA_Web.Interfaces
 {
-    public interface IDirection
+    public interface IServiceDirection
     {
-        DirectionModel Direction { get; }
-        List<DirectionModel> Directions { get; }
+        Direction CurrentDirection { get; }
+        List<Direction> Directions { get; }
         int Size { set; get; }
         void SetNextDirection();
+        void InitialDirections(int StartIndex, int EndIndex);
     }
 }
