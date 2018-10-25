@@ -10,135 +10,110 @@ namespace RSA_Web.Services
 
     public class RSAService : IServiceRSA
     {
-        public IServiceDirection DirectionService { get; set; }
+        private double? CurrentExtremum { get; set; }
 
-        public List<Step> Steps { get; set; }
+        private IServiceDirection DirectionService { get; set; }
 
-        private Func<ArgumentsVector, double> Function;
+        private IServiceRSAConfiguration ConfigurationService { get; set; }
 
-        private Func<Step, bool> EvaluateSolutionQuality;
+        private List<Step> Steps { get; set; }
 
-        private Func<Step, bool> IsStop;
-
-        private int MaxStepsCount;
-
-        private double MaxZeroPointValue;
-
-        private double MinZeroPointValue;
-
-        private int ArgumentsCount;
-
-        private double CurrentStepSize;
-
-        private double Extremum;
-
-        public RSAService(IServiceDirection DirectionService)
+        public RSAService(IServiceDirection DirectionService, IServiceRSAConfiguration ConfigurationService)
         {
             this.DirectionService = DirectionService;
+            this.ConfigurationService = ConfigurationService;
+
             Steps = new List<Step>();
-            Function = DefaultFunction;
-            EvaluateSolutionQuality = DefaultQualityLevel;
-            IsStop = DefaultStop;
+            CurrentExtremum = null;
         }
 
-        public void InitStartValue(int MaxSteps = 50,
-            double StepSize = 100,
-            int ArgumentCount = 1,
-            int MaxDirectionsCount = 3,
-            double MinZeroPointValue = 10,
-            double MaxZeroPointValue = 1000)
+        private List<double> MoveArguments(List<double> OldArg, double StepSize)
         {
-            this.MaxStepsCount = MaxSteps;
-            this.CurrentStepSize = StepSize;
-            this.ArgumentsCount = ArgumentCount;
-            DirectionService.Size = MaxDirectionsCount;
-            this.MinZeroPointValue = MinZeroPointValue;
-            this.MaxZeroPointValue = MaxZeroPointValue;
-           
-            MakeStep(GenerateZeroPoint());
-            Extremum = Steps.LastOrDefault().FunctionValue;
-        }
-
-        private ArgumentsVector MoveArguments(ArgumentsVector OldArg, double StepSize)
-        {
-            ArgumentsVector NewArg = new ArgumentsVector();
-            for (var i = 0; i < OldArg.X.Count; i++)
+            List<double> NewArg = new List<double>();
+            for (var i = 0; i < OldArg.Count; i++)
             {
-                NewArg.X.Add(OldArg.X[i] + DirectionService.CurrentDirection * StepSize);
+                NewArg.Add(OldArg[i] + DirectionService.CurrentDirection * StepSize);
             }
             return NewArg;
         }
 
-        private void MakeStep(ArgumentsVector NewX)
+        private Step MakeStep(List<double> Arguments)
         {
             Step CurrentStep = new Step()
             {
                 StepNumber = Steps.Count,
-                StepSize = CurrentStepSize,
+                StepSize = ConfigurationService.CurrentConfiguration.CurrentStepSize,
                 Direction = DirectionService.CurrentDirection,
-                Arguments = NewX,
+                Arguments = Arguments,
             };
 
-            CurrentStep.FunctionValue = Function(CurrentStep.Arguments);
-            CurrentStep.IsGoodSolution = EvaluateSolutionQuality(CurrentStep);
-            CurrentStep.IsFinalStep = IsStop(CurrentStep);
-            Steps.Add(CurrentStep);
-            if(CurrentStep.FunctionValue < Extremum)
+            CurrentStep.FunctionValue = ConfigurationService.CurrentConfiguration.Function(CurrentStep.Arguments);
+            CurrentStep.IsGoodSolution = ConfigurationService.CurrentConfiguration.EvaluateSolutionQuality(CurrentStep, CurrentExtremum);
+            CurrentStep.IsFinalStep = ConfigurationService.CurrentConfiguration.IsStop(CurrentStep);
+
+            if (CurrentStep.FunctionValue < CurrentExtremum || CurrentExtremum==null)
             {
-                Extremum = CurrentStep.FunctionValue;
+                CurrentExtremum = CurrentStep.FunctionValue;
             }
+
+            return CurrentStep;
         }
 
-        private ArgumentsVector GenerateZeroPoint()
+        private Step BestSolution()
         {
-            ArgumentsVector ZeroPoint = new ArgumentsVector();
+            return (from step in Steps
+                    where step.FunctionValue == CurrentExtremum
+                    select step).First();
+        }
 
-            for (var i = 0; i < ArgumentsCount; i++)
+        //I
+        public void SetConfiguration(Configuration UserConfiguration)
+        {
+            UserConfiguration.Function = ConfigurationService.DefaultConfiguration.Function;
+            UserConfiguration.EvaluateSolutionQuality = ConfigurationService.DefaultConfiguration.EvaluateSolutionQuality;
+            UserConfiguration.IsStop = ConfigurationService.DefaultConfiguration.IsStop;
+
+            ConfigurationService.CurrentConfiguration = UserConfiguration;
+        }
+
+        //II get
+        public List<double> GenerateZeroPoint()
+        {
+            List<double> ZeroPoint = new List<double>();
+
+            for (var i = 0; i < ConfigurationService.CurrentConfiguration.FunctionArgumetnsCount; i++)
             {
                 var Random = new Random();
-                var Value = Random.NextDouble() * (MaxZeroPointValue - MinZeroPointValue) + MinZeroPointValue;
-                ZeroPoint.X.Add(Value);
+                var Value = Random.NextDouble() * (ConfigurationService.CurrentConfiguration.MaxZeroPointValue - ConfigurationService.CurrentConfiguration.MinZeroPointValue) + ConfigurationService.CurrentConfiguration.MinZeroPointValue;
+                ZeroPoint.Add(Value);
             }
+            SetZeroPoint(ZeroPoint);
             return ZeroPoint;
         }
 
+        //II Post
+        public void SetZeroPoint(List<double> Point)
+        {
+            ConfigurationService.CurrentConfiguration.CurrentZeroPoint = Point;
+        }
+
+        // III
         public object[] StartAlghoritmRSA()
         {
-            InitStartValue();
-
-            while (!IsStop(Steps.Last()))
+            while (!ConfigurationService.CurrentConfiguration.IsStop(Steps.Last()))
             {
-                MakeStep(MoveArguments(Steps.Last().Arguments, CurrentStepSize));
+                List<double> MovedArguments = MoveArguments(Steps.Last().Arguments, ConfigurationService.CurrentConfiguration.CurrentStepSize);
+                Step CurrentStep = MakeStep(MovedArguments);
+                Steps.Add(CurrentStep);
                 if (!Steps.Last().IsGoodSolution)
                 {
                     DirectionService.SetNextDirection();
                 }
             }
-            return new object[] {Extremum, BestSolution(), DirectionService.Directions, Steps };
+            return new object[] { CurrentExtremum, BestSolution(), DirectionService.Directions, Steps };
         }
 
-        public Step BestSolution()
-        {
-            return (from step in Steps
-                    where step.FunctionValue == Extremum
-                    select step).First();
-        }
+       
 
-        private double DefaultFunction(ArgumentsVector Argumetns)
-        {
-            //var Rez = 140 * Math.Pow(Argumetns.X[0], 0.93) + 150 * Math.Pow(Argumetns.X[0], 0.86);
-
-            return Math.Sin(Argumetns.X[0]);
-        }
-
-        private bool DefaultQualityLevel(Step CurrentStep)
-        {
-            return (Steps.Count == 0 || CurrentStep.FunctionValue < Extremum);
-        }
-
-        private bool DefaultStop(Step CurrentStep)
-        {
-            return (Steps.Count >= MaxStepsCount  || (CurrentStep.Direction.index >= DirectionService.Size-1) && CurrentStep.IsGoodSolution==false);
-        }
     }
 }

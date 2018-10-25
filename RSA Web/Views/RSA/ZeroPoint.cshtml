@@ -1,0 +1,22 @@
+﻿@model ZeroPointView
+@{
+    ViewData["Title"] = "RSA";
+    Layout = "_Layout";
+}
+
+<div>
+    <label>X<sup>0</sup> = {</label>
+</div>
+@for (var i = 0; i < Model.Point.Count; i++)
+{
+    <div class="form-group">
+        <label>X<sup>0</sup></label>
+        <input id=X@i type="number" class="form-control" placeholder="" value="@Model.Point[i]">
+    </div>
+}
+<div>
+    }
+</div>
+
+
+

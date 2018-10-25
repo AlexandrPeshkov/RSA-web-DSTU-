@@ -8,16 +8,9 @@ namespace RSA_Web.Interfaces
 {
     public interface IServiceRSA
     {
-        void InitStartValue(
-            int MaxSteps,
-            double StepSize,
-            int ArgumentCount ,
-            int MaxDirectionsCount,
-            double MinZeroPointValue ,
-            double MaxZeroPointValue );
         object[] StartAlghoritmRSA();
-        List<Step> Steps { get; set; }
-
-        IServiceDirection DirectionService { get; set; }
+        void SetConfiguration(Configuration configuration);
+        List<double> GenerateZeroPoint();
+        void SetZeroPoint(List<double> Point);
     }
 }

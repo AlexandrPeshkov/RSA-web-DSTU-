@@ -13,7 +13,7 @@ namespace RSA_Web.Models
 
         public Direction Direction { get; set; }
 
-        public ArgumentsVector Arguments { get; set; }
+        public List<double> Arguments { get; set; }
 
         public double FunctionValue { get; set; }
 
