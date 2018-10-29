@@ -26,7 +26,7 @@ namespace RSA_Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddTransient<IServiceRSA, RSAService>();
+            services.AddSingleton<IServiceRSA, RSAService>();
             services.AddSingleton<IServiceDirection, DirectionService>();
             services.AddSingleton<IServiceRSAConfiguration, RSAConfigurationService>();
         }
@@ -49,8 +49,6 @@ namespace RSA_Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=RSA}/{action=Init}/{id?}");
-                //routes.MapRoute("RSA", "RSA/{*Start}",
-                //    defaults: new { controller = "RSA", action = "Start" });
             });
         }
     }

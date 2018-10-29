@@ -1,4 +1,5 @@
-﻿using RSA_Web.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using RSA_Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,13 @@ namespace RSA_Web.Interfaces
 {
     public interface IServiceRSA
     {
-        object[] StartAlghoritmRSA();
+        Dictionary<string, object>  StartAlghoritmRSA();
         void SetConfiguration(Configuration configuration);
+        Configuration DefaultConfiguration { get; }
+        Configuration CurrentConfiguration { get; }
+        List<double> ZeroPoint { get; set; }
         List<double> GenerateZeroPoint();
-        void SetZeroPoint(List<double> Point);
+        List<Direction> GenerateDirections();
+        List<Direction> Directions { get; set; }
     }
 }

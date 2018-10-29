@@ -23,32 +23,40 @@ namespace RSA_Web.Controllers
         /// Вывод констант и формы для ввода параметров 
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("/")]
         public IActionResult Init()
         {
-            return View("Init",new ConfigurationView());
+            return PartialView("_Configuration", (ConfigurationView)RSAService.CurrentConfiguration);
         }
 
         /// <summary>
         /// Применение конфигурации, отправка формы, вывод формы для ввода начальной точки
         /// </summary>
         /// <param name="configuration"></param>
-        /// <returns></returns>
-        [HttpPost]
+        /// <returns>Переход к форме задания начальной точки</returns>
+        [HttpPost("/")]
         public IActionResult Init(ConfigurationView configuration)
         {
-            RSAService.SetConfiguration(configuration);
-            return View("ZeroPoint", new ZeroPointView());
+            if (ModelState.IsValid)
+            {
+                RSAService.SetConfiguration(configuration);
+                return RedirectToAction("StartPoint");
+            }
+            return View("_Configuration", (ConfigurationView)RSAService.DefaultConfiguration);
+            //return PartialView("_ZeroPoint", new ZeroPointView(RSAService.ZeroPoint.Count));
+            //return Json(configuration);
         }
 
         /// <summary>
         /// Получить рандомное значение начальной точки
         /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IActionResult SetStart()
+        /// <returns>Случайная точка</returns>
+        [HttpGet("/X")]
+        public IActionResult StartPoint()
         {
-            return View("ZeroPoint", RSAService.GenerateZeroPoint());
+            var Point = RSAService.GenerateZeroPoint();
+            return PartialView("_ZeroPoint", Point);
+            //return Json(RSAService.GenerateZeroPoint());
         }
 
         /// <summary>
@@ -56,11 +64,43 @@ namespace RSA_Web.Controllers
         /// </summary>
         /// <param name="Point"></param>
         /// <returns></returns>
-        [HttpPost]
-        public IActionResult SetStart(List<double> Point)
+        [HttpPost("/X")]
+        public IActionResult StartPoint(List<double> Point)
         {
-            RSAService.SetZeroPoint(Point);
-            return View("Steps", RSAService.StartAlghoritmRSA());
+            RSAService.ZeroPoint = Point;
+            return RedirectToAction("Directions");
+        }
+
+        /// <summary>
+        /// Получить направления
+        /// </summary>
+        /// <returns>Список направлений, дробные числа в [0;1]</returns>
+        [HttpGet("/Dirs")]
+        public IActionResult Directions()
+        {
+            return PartialView("_Directions", RSAService.GenerateDirections());
+        }
+
+        /// <summary>
+        /// Задать направления вручную
+        /// </summary>
+        /// <param name="Directions"></param>
+        /// <returns>Ок</returns>
+        [HttpPost("/Dirs")]
+        public IActionResult Directions(List<Direction> Directions)
+        {
+            RSAService.Directions = Directions;
+            return RedirectToAction("Start");
+        }
+
+        /// <summary>
+        /// Запуск работы алгоритма RSA
+        /// </summary>
+        /// <returns>Экстремум, Лучший шаг, Список направлений, Все шаги</returns>
+        [HttpGet("/Start")]
+        public IActionResult Start()
+        {
+            return PartialView("_Result", (ResultView)RSAService.StartAlghoritmRSA());
         }
     }
 }

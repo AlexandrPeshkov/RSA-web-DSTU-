@@ -29,20 +29,30 @@ namespace RSA_Web.Services
         /// <remarks>
         /// Расширяемое singletone множество коэффициентов для изменения шага поиска
         /// </remarks>
-        public List<Direction> Directions { get; private set; }
+        public List<Direction> Directions { get; set; }
 
         /// <summary>
         /// Текущий размер множества направлений
         /// </summary>
-        public int Size
+        public uint Size
         {
             get
             {
-                return Directions.Count;
+                return (uint)Directions.Count;
             }
             set
             {
-                Resize(value);
+                Directions = new List<Direction>();
+                for (var i =0; i<value; i++)
+                {
+                    Directions.Add(
+                        new Direction()
+                        {
+                            index = i,
+                            direction = 0
+                        }
+                    );
+                }
             }
         }
         #endregion
@@ -55,43 +65,6 @@ namespace RSA_Web.Services
         {
             this.Directions = new List<Direction>();
             CurrentDirectionIndex = 0;
-        }
-
-        public void InitialDirections(int StartIndex, int EndIndex)
-        {
-            for (int i = StartIndex; i < EndIndex; i++)
-            {
-                var Value = new Random().NextDouble() * (MaximumDirectionValue - MinimumDirectionValue) + MinimumDirectionValue;
-                Directions.Add(new Direction
-                {
-                    direction = Value,
-                    index = i
-                });
-            }
-        }
-
-        private void Resize(int NewSize)
-        {
-            if (Size == 0)
-            {
-                Directions = new List<Direction>();
-                InitialDirections(0, NewSize);
-                this.Size = NewSize;
-            }
-            else
-            {
-                if(NewSize > Size)
-                {
-                    InitialDirections(Size, NewSize);
-                }
-                else
-                {
-                    if(NewSize < Size)
-                    {
-                        Directions = Directions.Take(NewSize).ToList<Direction>();
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -107,7 +80,11 @@ namespace RSA_Web.Services
                 }
                 else
                 {
-                    return null;
+                    return new Direction()
+                    {
+                        direction = 0,
+                        index = -1
+                    };
                 }
             }
         }
@@ -123,8 +100,33 @@ namespace RSA_Web.Services
             }
             else
             {
-                throw new IndexOutOfRangeException($"Нельзя выбрать следующее направление, CurrIndex = {CurrentDirectionIndex} MaxIndex={Size - 1}");
+                throw new IndexOutOfRangeException($"Нельзя выбрать следующее направление, CurrIndex = {CurrentDirectionIndex} Size={Size}");
             }
+        }
+
+        public void ResetDirectionsPointer()
+        {
+            this.CurrentDirectionIndex = 0;
+        }
+
+        /// <summary>
+        /// Генератор случайных направлений
+        /// </summary>
+        /// <returns>Список направлений размера Size</returns>
+        public List<Direction> GenerateDirections()
+        {
+            var NewDirections = new List<Direction>();
+            for (int i = 0; i < Size; i++)
+            {
+                var Value = new Random().NextDouble() * (MaximumDirectionValue - MinimumDirectionValue) + MinimumDirectionValue;
+                NewDirections.Add(new Direction
+                {
+                    direction = Value,
+                    index = i
+                });
+            }
+            Directions = NewDirections;
+            return Directions;
         }
         #endregion
     }

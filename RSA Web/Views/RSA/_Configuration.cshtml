@@ -1,0 +1,63 @@
+@model ConfigurationView
+@{
+    ViewData["Title"] = "Конфигурация";
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true)
+
+    <h1>Константы</h1>
+    <div class="form-group">
+        <label>Функция</label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FunctionArgumetnsCount, new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.FunctionArgumetnsCount, null, new { @class = "form-control", @readonly = "readonly", @autocomplete = "off" })
+        @Html.ValidationMessageFor(model => model.FunctionArgumetnsCount)
+        <small class="form-text text-muted">Функция задана в исходном коде</small>
+    </div>
+    <div class="form-group">
+        <label>Условие остановки</label>
+    </div>
+    <div class="form-group">
+        <label>Правило оценки качества решения</label>
+    </div>
+
+    <h1>Параметры</h1>
+    <div class="form-group">
+        @Html.LabelFor(model => model.StepsLimit, new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.StepsLimit, null, new { @class = "form-control", @autocomplete = "off", @type="number" })
+        @Html.ValidationMessageFor(model => model.StepsLimit)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.StepSize, new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.StepSize, null, new { @class = "form-control", @autocomplete = "off"})
+        @Html.ValidationMessageFor(model => model.StepSize)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MinZeroPointValue, new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.MinZeroPointValue, null, new { @class = "form-control", @autocomplete = "off" })
+        @Html.ValidationMessageFor(model => model.MinZeroPointValue)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaxZeroPointValue, new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.MaxZeroPointValue, null, new { @class = "form-control", @autocomplete = "off" })
+        @Html.ValidationMessageFor(model => model.MaxZeroPointValue)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DirectionsCount, new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.DirectionsCount, null, new { @class = "form-control", @autocomplete = "off", @type = "number" })
+        @Html.ValidationMessageFor(model => model.DirectionsCount)
+    </div>
+    <div class="anil_nepal">
+        <label class="switch switch-left-right">
+            @Html.CheckBoxFor(model => model.IsMinimization, new { @class="switch-input", @data_toggle = "toggle" })
+            <span class="switch-label" data-on="Min" data-off="Max"></span> 
+            <span class="switch-handle"></span>
+        </label>
+    </div>
+    <button type="submit" class="btn btn-success">Применить</button>
+}

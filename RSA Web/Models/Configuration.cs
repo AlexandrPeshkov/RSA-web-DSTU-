@@ -8,17 +8,19 @@ namespace RSA_Web.Models
 {
     public class Configuration
     {
-        public int MaxStepsCount { get; set; }
+        public uint StepsLimit { get; set; }
 
         public double MaxZeroPointValue { get; set; }
 
         public double MinZeroPointValue { get; set; }
 
-        public double CurrentStepSize { get; set; }
+        public double StepSize { get; set; }
 
-        public double FunctionArgumetnsCount { get; set; }
+        public uint FunctionArgumetnsCount { get; set; }
 
-        public List<double> CurrentZeroPoint { get; set; }
+        public uint DirectionsCount { get; set; }
+
+        public List<double> ZeroPoint { get; set; }
 
         public Func<List<double>, double> Function { get; set; }
 
@@ -27,6 +29,20 @@ namespace RSA_Web.Models
         public Func<Step, bool> IsStop { get; set; }
 
         public Func<double?, double?, bool> ExtremumPredicate { get; set; }
+
+        public static implicit operator ConfigurationView(Configuration Configuration)
+        {
+            return new ConfigurationView()
+            {
+                FunctionArgumetnsCount = Configuration.FunctionArgumetnsCount,
+                StepsLimit = Configuration.StepsLimit,
+                MaxZeroPointValue = Configuration.MaxZeroPointValue,
+                MinZeroPointValue = Configuration.MinZeroPointValue,
+                StepSize = Configuration.StepSize,
+                DirectionsCount = Configuration.DirectionsCount,
+                IsMinimization = Configuration.ExtremumPredicate(double.MinValue, double.MaxValue)
+            };
+        }
 
         public static implicit operator Configuration(ConfigurationView ConfigurationView)
         {
@@ -43,10 +59,11 @@ namespace RSA_Web.Models
 
             return new Configuration()
             {
-                MaxStepsCount = ConfigurationView.MaxStepsCount,
+                StepsLimit = ConfigurationView.StepsLimit,
                 MaxZeroPointValue = ConfigurationView.MaxZeroPointValue,
                 MinZeroPointValue = ConfigurationView.MinZeroPointValue,
-                CurrentStepSize = ConfigurationView.CurrentStepSize,
+                DirectionsCount = ConfigurationView.DirectionsCount,
+                StepSize = ConfigurationView.StepSize,
                 FunctionArgumetnsCount = ConfigurationView.FunctionArgumetnsCount,
                 ExtremumPredicate = Predicate
             };

@@ -22,17 +22,18 @@ namespace RSA_Web.Services
 
             DefaultConfiguration = new Configuration()
             {
-                MaxStepsCount = 100,
-                MaxZeroPointValue = 1000,
-                MinZeroPointValue = -1000,
-                CurrentStepSize = 1,
                 FunctionArgumetnsCount = 2,
+                StepsLimit = 300,
+                MaxZeroPointValue = 10,
+                MinZeroPointValue = -10,
+                StepSize = 0.1,
+                DirectionsCount = 100,
 
-                CurrentZeroPoint = new List<double>(),
+                ZeroPoint = new double[2].ToList(),
 
                 Function = (List<double> Args) =>
                 {
-                    return 3 * Math.Pow(Args[0], 2) + Args[0] * Args[1] + 2 * Math.Pow(Args[1], 2) - Args[0] - 4 * Args[1];
+                    return 3 * Math.Pow(Args[0], 2) + Args[0] * Args[1] + 2 * Math.Pow(Args[1], 2) - Args[0] - 4 * Args[1];                  
                 },
 
                 EvaluateSolutionQuality = (Step CurrentStep, double? CurrentExtremum) =>
@@ -44,8 +45,8 @@ namespace RSA_Web.Services
                 {
                     return 
                     (CurrentStep != null && (
-                     CurrentStep?.StepNumber >= this.CurrentConfiguration.MaxStepsCount  || 
-                     (CurrentStep?.Direction.index >= DirectionService.Size - 1) && CurrentStep?.IsGoodSolution == false));
+                     CurrentStep?.StepNumber >= this.CurrentConfiguration.StepsLimit  || 
+                     (CurrentStep?.Direction.index >= DirectionService.Directions.Count - 1) && CurrentStep?.IsGoodSolution == false));
                 },
 
                 ExtremumPredicate = (double? left, double? right) =>
@@ -53,6 +54,8 @@ namespace RSA_Web.Services
                     return left < right;
                 }
             };
+
+            CurrentConfiguration = DefaultConfiguration;
         }
 
     }

@@ -9,9 +9,11 @@ namespace RSA_Web.Interfaces
     public interface IServiceDirection
     {
         Direction CurrentDirection { get; }
-        List<Direction> Directions { get; }
-        int Size { set; get; }
+        List<Direction> Directions { get; set; }
+        uint Size { set; get; }
+
         void SetNextDirection();
-        void InitialDirections(int StartIndex, int EndIndex);
+        List<Direction> GenerateDirections();
+        void ResetDirectionsPointer();
     }
 }
