@@ -12,30 +12,27 @@ namespace RSA_Web.ViewModels
 {
     public class ResultView
     {
-        public Configuration Configuration { get; set; }
+        public ConfigurationView Configuration { get; set; }
 
-        public List<Direction> Directions { get; set; }
+        public List<DirectionView> Directions { get; set; }
 
         public List<double> ZeroPoint { get; set; }
 
-        public List<Step> Steps { get; set; }
+        public List<StepView> Steps { get; set; }
 
-        [Display(Name ="Лучшее решение")]
-        public Step BestSolution { get; set; }
+        public StepView BestSolution { get; set; }
 
-        public static implicit operator ResultView(Dictionary<string,object> Result)
+        public static implicit operator ResultView(object[] Result)
         {
-            
 
             ResultView resultView = new ResultView()
             {
-                Configuration = (Configuration)Result["Configuration"],
-                Directions = (List<Direction>)Result["Directions"],
-                ZeroPoint = (List<double>)Result["ZeroPoint"],
-                Steps = (List < Step>)Result["Steps"],
-                BestSolution = (Step)Result["BestSolution"],
+                Configuration  = (ConfigurationView)Result[0],
+                Directions = (List<DirectionView>)Result[1],
+                ZeroPoint = (List<double>)Result[2],
+                Steps = (List<StepView>)Result[3],
+                BestSolution = (StepView)Result[4]
             };
-
             return resultView;
         }
     }

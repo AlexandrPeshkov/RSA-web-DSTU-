@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using RSA_Web.Interfaces;
 using RSA_Web.Models;
 using RSA_Web.ViewModels;
+using RSA_Web.Extensions;
 
 namespace RSA_Web.Services
 {
@@ -192,7 +193,7 @@ namespace RSA_Web.Services
         }
 
         // III
-        public Dictionary<string, object> StartAlghoritmRSA()
+        public object[] StartAlghoritmRSA()
         {
             ResetState();
             MakeZeroStep();
@@ -207,39 +208,14 @@ namespace RSA_Web.Services
                     DirectionService.SetNextDirection();
                 }
             }
-
-            ResultView result = new ResultView()
-            {
-                //Configuration = ConfigurationService.CurrentConfiguration,
-                //Directions = Directions,
-                //ZeroPoint = ZeroPoint,
-                Steps = Steps,
-                //BestSolution = BestSolution
-            };
-
-            Dictionary<string, object> Result = new Dictionary<string, object>()
-            {
+            object[] Result =
                 {
-                    "Configuration",
-                     ConfigurationService.CurrentConfiguration
-                },
-                {
-                    "Directions",
-                    Directions
-                },
-                {
-                    "ZeroPoint",
-                    ZeroPoint
-                },
-                {
-                    "Steps",
-                    Steps
-                },
-                {
-                    "BestSolution",
-                    BestSolution
-                }
-            };
+                (ConfigurationView)ConfigurationService.CurrentConfiguration,
+                Directions.ToView(),
+                ZeroPoint,
+                Steps.ToView(),
+                (StepView)BestSolution
+                };
             return Result;
         }
 

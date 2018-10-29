@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using RSA_Web.Models;
 using RSA_Web.ViewModels;
 using RSA_Web.Interfaces;
+using RSA_Web.Extensions;
 
 namespace RSA_Web.Controllers
 {
@@ -26,7 +27,7 @@ namespace RSA_Web.Controllers
         [HttpGet("/")]
         public IActionResult Init()
         {
-            return PartialView("_Configuration", (ConfigurationView)RSAService.CurrentConfiguration);
+            return PartialView("Configuration", (ConfigurationView)RSAService.CurrentConfiguration);
         }
 
         /// <summary>
@@ -42,9 +43,7 @@ namespace RSA_Web.Controllers
                 RSAService.SetConfiguration(configuration);
                 return RedirectToAction("StartPoint");
             }
-            return View("_Configuration", (ConfigurationView)RSAService.DefaultConfiguration);
-            //return PartialView("_ZeroPoint", new ZeroPointView(RSAService.ZeroPoint.Count));
-            //return Json(configuration);
+            return View("Configuration", RSAService.DefaultConfiguration);
         }
 
         /// <summary>
@@ -55,8 +54,7 @@ namespace RSA_Web.Controllers
         public IActionResult StartPoint()
         {
             var Point = RSAService.GenerateZeroPoint();
-            return PartialView("_ZeroPoint", Point);
-            //return Json(RSAService.GenerateZeroPoint());
+            return PartialView("Point", Point);
         }
 
         /// <summary>
@@ -78,7 +76,7 @@ namespace RSA_Web.Controllers
         [HttpGet("/Dirs")]
         public IActionResult Directions()
         {
-            return PartialView("_Directions", RSAService.GenerateDirections());
+            return PartialView("Directions", RSAService.GenerateDirections().ToView());
         }
 
         /// <summary>
@@ -100,7 +98,7 @@ namespace RSA_Web.Controllers
         [HttpGet("/Start")]
         public IActionResult Start()
         {
-            return PartialView("_Result", (ResultView)RSAService.StartAlghoritmRSA());
+            return PartialView("Result", (ResultView)RSAService.StartAlghoritmRSA());
         }
     }
 }

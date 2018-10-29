@@ -27,7 +27,7 @@ namespace RSA_Web.Services
                 MaxZeroPointValue = 10,
                 MinZeroPointValue = -10,
                 StepSize = 0.1,
-                DirectionsCount = 100,
+                DirectionsCount = 10,
 
                 ZeroPoint = new double[2].ToList(),
 
@@ -46,7 +46,7 @@ namespace RSA_Web.Services
                     return 
                     (CurrentStep != null && (
                      CurrentStep?.StepNumber >= this.CurrentConfiguration.StepsLimit  || 
-                     (CurrentStep?.Direction.index >= DirectionService.Directions.Count - 1) && CurrentStep?.IsGoodSolution == false));
+                     (CurrentStep?.Direction.Index >= DirectionService.Directions.Count - 1) && CurrentStep?.IsGoodSolution == false));
                 },
 
                 ExtremumPredicate = (double? left, double? right) =>

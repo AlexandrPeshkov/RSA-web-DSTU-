@@ -9,7 +9,7 @@ namespace RSA_Web.Interfaces
 {
     public interface IServiceRSA
     {
-        Dictionary<string, object>  StartAlghoritmRSA();
+        object[]  StartAlghoritmRSA();
         void SetConfiguration(Configuration configuration);
         Configuration DefaultConfiguration { get; }
         Configuration CurrentConfiguration { get; }

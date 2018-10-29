@@ -1,0 +1,28 @@
+﻿@model List<double>
+@{
+    ViewData["Title"] = "Точка";
+    Layout = "_Layout";
+}
+<details open>
+    <summary>Точка</summary>
+    <div>
+        <label>X<sup>i</sup> = {</label>
+    </div>
+    <div>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+        <div class="form-group">
+            @Html.LabelFor(model => model[i] , new { @class = "control-label" })
+            @Html.TextBoxFor(model => model[i], null, new { @class = "form-contol", @placeholder = "X["+i+"]" })
+        </div>
+        }
+    </div>
+    <div>
+        }
+    </div>
+</details>
+
+
+
+
+

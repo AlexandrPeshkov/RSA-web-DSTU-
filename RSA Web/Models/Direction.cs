@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RSA_Web.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,17 +8,27 @@ namespace RSA_Web.Models
 {
     public class Direction
     {
-        public double direction { get; set; }
-        public int index { get; set; }
+        public double Value { get; set; }
+        public int Index { get; set; }
 
         public static explicit operator double(Direction Direction)
         {
-            return Direction.direction;
+            return Direction.Value;
         }
 
-        public static double operator* (Direction left, double right)
+        public static double operator *(Direction left, double right)
         {
-            return left.direction * right;
+            return left.Value * right;
         }
+
+        public static implicit operator DirectionView(Direction direction)
+        {
+            return new DirectionView()
+            {
+                Value = direction.Value,
+                Index = direction.Index
+            };
+        }
+
     }
 }

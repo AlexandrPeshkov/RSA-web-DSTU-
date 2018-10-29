@@ -1,0 +1,13 @@
+﻿@model List<DirectionView>
+@{
+    ViewData["Title"] = "Направления";
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("Partial/_Directions", Model)
+    <button type="button" class="btn btn-warning">Случайные</button>
+    <button type="submit" class="btn btn-success">Применить</button>
+
+}

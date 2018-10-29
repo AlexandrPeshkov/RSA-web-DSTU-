@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace RSA_Web.ViewModels
 {
-    [Display(Name ="Лучшее решение")]
-    public class BestStepView
+    [Display(Name ="Решение")]
+    public class StepView
     {
         [Display(Name = "Номер шага")]
         public int StepNumber { get; set; }
@@ -17,7 +17,7 @@ namespace RSA_Web.ViewModels
         public double StepSize { get; set; }
 
         [Display(Name = "Направление")]
-        public Direction Direction { get; set; }
+        public DirectionView Direction { get; set; }
 
         [Display(Name = "Точка")]
         public List<double> Point { get; set; }
@@ -30,5 +30,19 @@ namespace RSA_Web.ViewModels
 
         [Display(Name = "Выполнение критерия остановки")]
         public bool IsFinalStep { get; set; }
+
+        public static implicit operator StepView(Step step)
+        {
+            return new StepView()
+            {
+                StepNumber = step.StepNumber,
+                StepSize = step.StepSize,
+                Direction = step.Direction,
+                Point = step.Point,
+                FunctionValue = step.FunctionValue,
+                IsGoodSolution = step.IsGoodSolution,
+                IsFinalStep = step.IsFinalStep
+            };
+        }
     }
 }

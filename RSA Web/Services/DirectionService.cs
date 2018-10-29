@@ -48,8 +48,8 @@ namespace RSA_Web.Services
                     Directions.Add(
                         new Direction()
                         {
-                            index = i,
-                            direction = 0
+                            Index = i,
+                            Value = 0
                         }
                     );
                 }
@@ -82,8 +82,8 @@ namespace RSA_Web.Services
                 {
                     return new Direction()
                     {
-                        direction = 0,
-                        index = -1
+                        Value = 0,
+                        Index = -1
                     };
                 }
             }
@@ -121,8 +121,8 @@ namespace RSA_Web.Services
                 var Value = new Random().NextDouble() * (MaximumDirectionValue - MinimumDirectionValue) + MinimumDirectionValue;
                 NewDirections.Add(new Direction
                 {
-                    direction = Value,
-                    index = i
+                    Value = Value,
+                    Index = i
                 });
             }
             Directions = NewDirections;

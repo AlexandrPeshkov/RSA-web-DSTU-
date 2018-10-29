@@ -1,0 +1,13 @@
+﻿@model ResultView
+@{
+    ViewData["Title"] = "Результат";
+    Layout = "_Layout";
+}
+
+@Html.Partial("Partial/_Configuration", Model.Configuration)
+
+@Html.Partial("Partial/_Point", Model.ZeroPoint)
+
+@Html.Partial("Partial/_Directions", Model?.Directions)
+
+@Html.Partial("Partial/_Step", Model.BestSolution)

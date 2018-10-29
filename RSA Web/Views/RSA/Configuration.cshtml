@@ -1,0 +1,24 @@
+﻿@model ConfigurationView
+@{
+    ViewData["Title"] = "Конфигурация";
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true)
+
+    @Html.Partial("Partial/_Configuration", Model)
+
+
+    <div class="anil_nepal">
+        <label class="switch switch-left-right">
+            @Html.CheckBoxFor(model => model.IsMinimization, new { @class = "switch-input", @data_toggle = "toggle" })
+            <span class="switch-label" data-on="Min" data-off="Max"></span>
+            <span class="switch-handle"></span>
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-success">Применить</button>
+}
