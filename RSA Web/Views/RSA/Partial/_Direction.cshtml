@@ -1,11 +1,9 @@
 ﻿@model DirectionView
-@{
-    ViewData["Title"] = "Конфигурация";
-    Layout = "_Layout";
-}
 
 @using (Html.BeginForm())
 {
-    @Html.EditorFor(model => model.Index, null, new { @class = "label" })
-    @Html.EditorFor(model => model.Value, null, new { @class = "label"})
+    <div class="form-group direction">
+        @Html.TextBoxFor(model => model.Index, null, new { @class = "form-control" })
+        @Html.TextBoxFor(model => model.Value, null, new { @class = "form-control" })
+    </div>
 }

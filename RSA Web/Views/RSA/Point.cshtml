@@ -12,9 +12,5 @@
     <h5>@ViewData["Title"]</h5>
     @Html.Partial("Partial/_Point", Model)
 
-    <div class="buttons">
-        <button type="button" class="btn btn-warning">Случайные</button>
-        <button type="submit" class="btn btn-success">Применить</button>
-    </div>
-
+    @Html.Partial("Partial/_Buttons", new ButtonsView(Buttons.RandomButton, Buttons.ApplyButton))
 }

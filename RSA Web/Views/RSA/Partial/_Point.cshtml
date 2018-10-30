@@ -1,8 +1,5 @@
 ﻿@model List<double>
-@{
-    ViewData["Title"] = "Точка";
-    Layout = "_Layout";
-}
+
 <details open>
     <summary>Точка</summary>
     <div>
@@ -13,7 +10,7 @@
         {
         <div class="form-group">
             @Html.LabelFor(model => model[i] , new { @class = "control-label" })
-            @Html.TextBoxFor(model => model[i], null, new { @class = "form-contol", @placeholder = "X["+i+"]" })
+            @Html.TextBoxFor(model => model[i], null, new { @id="X_"+i, @class = "form-control", @placeholder = "X["+i+"]" })
         </div>
         }
     </div>

@@ -1,0 +1,9 @@
+﻿@model ButtonsView
+
+<div class="buttons">
+    @foreach (var button in Model.Buttons)
+    {
+    <button type="@button.Type.ToString("G").ToLower()" class="@string.Join(' ', button.Classes)">@button.Text</button>
+    }
+</div>
+

@@ -7,7 +7,5 @@
 @using (Html.BeginForm())
 {
     @Html.Partial("Partial/_Directions", Model)
-    <button type="button" class="btn btn-warning">Случайные</button>
-    <button type="submit" class="btn btn-success">Применить</button>
-
+    @Html.Partial("Partial/_Buttons", new ButtonsView(Buttons.RandomButton, Buttons.ApplyButton))
 }

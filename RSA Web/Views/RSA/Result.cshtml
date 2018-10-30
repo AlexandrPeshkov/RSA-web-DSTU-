@@ -4,10 +4,13 @@
     Layout = "_Layout";
 }
 
-@Html.Partial("Partial/_Configuration", Model.Configuration)
+@using (Html.BeginForm())
+{
+    @Html.Partial("Partial/_Configuration", Model.Configuration)
 
-@Html.Partial("Partial/_Point", Model.ZeroPoint)
+    @Html.Partial("Partial/_Point", Model.ZeroPoint)
 
-@Html.Partial("Partial/_Directions", Model?.Directions)
+    @Html.Partial("Partial/_Directions", Model?.Directions)
 
-@Html.Partial("Partial/_Step", Model.BestSolution)
+    @Html.Partial("Partial/_Step", Model.BestSolution)
+}

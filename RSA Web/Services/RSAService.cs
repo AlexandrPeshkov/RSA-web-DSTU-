@@ -120,6 +120,11 @@ namespace RSA_Web.Services
             return NewPoint;
         }
 
+        /// <summary>
+        /// Выполнить шаг со сдвигом аргументов
+        /// </summary>
+        /// <param name="Arguments"></param>
+        /// <returns></returns>
         private Step MakeStep(List<double> Arguments)
         {
             Step CurrentStep = new Step()
@@ -143,7 +148,10 @@ namespace RSA_Web.Services
             return CurrentStep;
         }
 
-        //I
+        /// <summary>
+        /// Установить начальные параметры алгоритма
+        /// </summary>
+        /// <param name="UserConfiguration"></param>
         public void SetConfiguration(Configuration UserConfiguration)
         {
             UserConfiguration.Function = ConfigurationService.DefaultConfiguration.Function;
@@ -155,7 +163,10 @@ namespace RSA_Web.Services
             ConfigurationService.CurrentConfiguration = UserConfiguration;
         }
 
-        //II get
+        /// <summary>
+        /// Генерация случайно стратовой точки
+        /// </summary>
+        /// <returns>Стартовая точка</returns>
         public List<double> GenerateZeroPoint()
         {
             List<double> Point = new List<double>();
@@ -170,15 +181,18 @@ namespace RSA_Web.Services
             return Point;
         }
 
-        //II Post
-
-        // Zero Step
+        /// <summary>
+        /// Выполнить начальный шаг
+        /// </summary>
         public void MakeZeroStep()
         {
             Step ZeroStep = MakeStep(ConfigurationService.CurrentConfiguration.ZeroPoint);
             Steps.Add(ZeroStep);
         }
 
+        /// <summary>
+        /// Очистить шаги, вернуться к исходному состоянию
+        /// </summary>
         private void ResetState()
         {
             DirectionService.ResetDirectionsPointer();
@@ -187,12 +201,19 @@ namespace RSA_Web.Services
             Steps = new List<Step>();
         }
 
+        /// <summary>
+        /// Сгенерировать список направлений в диапазоне [0;1]
+        /// </summary>
+        /// <returns>Список направлений</returns>
         public List<Direction> GenerateDirections()
         {
             return DirectionService.GenerateDirections();
         }
 
-        // III
+        /// <summary>
+        /// Запуск работы алгоритма
+        /// </summary>
+        /// <returns></returns>
         public object[] StartAlghoritmRSA()
         {
             ResetState();
@@ -203,11 +224,13 @@ namespace RSA_Web.Services
                 List<double> NextPoint = MoveArguments(Steps.LastOrDefault().Point);
                 Step CurrentStep = MakeStep(NextPoint);
                 Steps.Add(CurrentStep);
+
                 if (!Steps.Last().IsGoodSolution)
                 {
                     DirectionService.SetNextDirection();
                 }
             }
+
             object[] Result =
                 {
                 (ConfigurationView)ConfigurationService.CurrentConfiguration,
@@ -218,6 +241,5 @@ namespace RSA_Web.Services
                 };
             return Result;
         }
-
     }
 }
