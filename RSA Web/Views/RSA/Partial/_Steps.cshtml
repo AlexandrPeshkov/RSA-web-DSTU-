@@ -1,0 +1,12 @@
+﻿@model List<StepView>
+@using (Html.BeginForm())
+{
+    <details>
+        <summary>Шаги</summary>
+
+        @foreach (var Step in Model)
+        {
+            @Html.Partial("Partial/_Step", Step)
+        }
+    </details>
+}

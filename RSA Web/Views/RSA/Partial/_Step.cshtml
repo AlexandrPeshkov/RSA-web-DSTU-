@@ -1,8 +1,8 @@
 ﻿@model StepView
 
-<details open>
+<details>
 
-    <summary>@Html.DisplayNameFor(Model => Model)</summary>
+    <summary>@Html.DisplayNameFor(Model => Model) @Model.StepNumber</summary>
     @using (Html.BeginForm())
     {
         <div class="form-group">

@@ -2405,6 +2405,12 @@
           "lib/netstandard1.4/Microsoft.IdentityModel.Xml.dll": {}
         }
       },
+      "Microsoft.Net.Compilers/2.8.2": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.Net.Compilers.props": {}
+        }
+      },
       "Microsoft.Net.Http.Headers/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -6694,6 +6700,64 @@
         "microsoft.identitymodel.xml.nuspec"
       ]
     },
+    "Microsoft.Net.Compilers/2.8.2": {
+      "sha512": "5PB9ikL1JqLsrCPWCE6oEmtlAMsUumU4kvEbKJW1254unnJoDeL8t9rgLxw6jFiL8VUIZd7M3U0q+0+k8BazYQ==",
+      "type": "package",
+      "path": "microsoft.net.compilers/2.8.2",
+      "files": [
+        ".signature.p7s",
+        "ThirdPartyNotices.rtf",
+        "build/Microsoft.Net.Compilers.props",
+        "microsoft.net.compilers.2.8.2.nupkg.sha512",
+        "microsoft.net.compilers.nuspec",
+        "tools/Microsoft.Build.Tasks.CodeAnalysis.dll",
+        "tools/Microsoft.CSharp.Core.targets",
+        "tools/Microsoft.CodeAnalysis.CSharp.Scripting.dll",
+        "tools/Microsoft.CodeAnalysis.CSharp.dll",
+        "tools/Microsoft.CodeAnalysis.Scripting.dll",
+        "tools/Microsoft.CodeAnalysis.VisualBasic.dll",
+        "tools/Microsoft.CodeAnalysis.dll",
+        "tools/Microsoft.DiaSymReader.Native.amd64.dll",
+        "tools/Microsoft.DiaSymReader.Native.x86.dll",
+        "tools/Microsoft.Managed.Core.targets",
+        "tools/Microsoft.VisualBasic.Core.targets",
+        "tools/System.AppContext.dll",
+        "tools/System.Collections.Immutable.dll",
+        "tools/System.Console.dll",
+        "tools/System.Diagnostics.FileVersionInfo.dll",
+        "tools/System.Diagnostics.StackTrace.dll",
+        "tools/System.IO.Compression.dll",
+        "tools/System.IO.FileSystem.Primitives.dll",
+        "tools/System.IO.FileSystem.dll",
+        "tools/System.IO.Pipes.AccessControl.dll",
+        "tools/System.IO.Pipes.dll",
+        "tools/System.Reflection.Metadata.dll",
+        "tools/System.Security.AccessControl.dll",
+        "tools/System.Security.Claims.dll",
+        "tools/System.Security.Cryptography.Algorithms.dll",
+        "tools/System.Security.Cryptography.Encoding.dll",
+        "tools/System.Security.Cryptography.Primitives.dll",
+        "tools/System.Security.Cryptography.X509Certificates.dll",
+        "tools/System.Security.Principal.Windows.dll",
+        "tools/System.Text.Encoding.CodePages.dll",
+        "tools/System.ValueTuple.dll",
+        "tools/System.Xml.ReaderWriter.dll",
+        "tools/System.Xml.XPath.XDocument.dll",
+        "tools/System.Xml.XPath.dll",
+        "tools/System.Xml.XmlDocument.dll",
+        "tools/VBCSCompiler.exe",
+        "tools/VBCSCompiler.exe.config",
+        "tools/csc.exe",
+        "tools/csc.exe.config",
+        "tools/csc.rsp",
+        "tools/csi.exe",
+        "tools/csi.exe.config",
+        "tools/csi.rsp",
+        "tools/vbc.exe",
+        "tools/vbc.exe.config",
+        "tools/vbc.rsp"
+      ]
+    },
     "Microsoft.Net.Http.Headers/2.1.1": {
       "sha512": "tNh1YCfZ943/d3WSE6cD57O05rhvi3lmKgwoi3zFg4wc/O/oec5FNHZmBCRau4GfzRC5zS/CBdOAkRwbvtZSaQ==",
       "type": "package",
@@ -7465,10 +7529,11 @@
       ]
     },
     "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+      "sha512": "znZGbws7E4BA9jxNZ7FuiIRI3C9hrgatVQSTKhIYZYNOud4M5VfGlTYi6RdYO5sQrebFuF/g9UEV3hOxDMXF6Q==",
       "type": "package",
       "path": "newtonsoft.json/11.0.2",
       "files": [
+        ".signature.p7s",
         "LICENSE.md",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -12214,6 +12279,7 @@
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.NETCore.App >= 2.1.0",
+      "Microsoft.Net.Compilers >= 2.8.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.1"
     ]
   },
@@ -12224,11 +12290,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\OneDrive\\Study\\DSTU\\Информационные методы и средства инженерии программного обеспечения\\RSA web\\RSA Web\\RSA Web.csproj",
-      "projectName": "RSA_Web",
-      "projectPath": "D:\\OneDrive\\Study\\DSTU\\Информационные методы и средства инженерии программного обеспечения\\RSA web\\RSA Web\\RSA Web.csproj",
+      "projectUniqueName": "D:\\OneDrive\\Study\\Code\\DSTU\\Информационные методы и средства инженерии программного обеспечения\\RSA Web\\RSA Web\\RSA Web.csproj",
+      "projectName": "RSA Web",
+      "projectPath": "D:\\OneDrive\\Study\\Code\\DSTU\\Информационные методы и средства инженерии программного обеспечения\\RSA Web\\RSA Web\\RSA Web.csproj",
       "packagesPath": "C:\\Users\\a.peshkov\\.nuget\\packages\\",
-      "outputPath": "D:\\OneDrive\\Study\\DSTU\\Информационные методы и средства инженерии программного обеспечения\\RSA web\\RSA Web\\obj\\",
+      "outputPath": "D:\\OneDrive\\Study\\Code\\DSTU\\Информационные методы и средства инженерии программного обеспечения\\RSA Web\\RSA Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12268,6 +12334,10 @@
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
+          },
+          "Microsoft.Net.Compilers": {
+            "target": "Package",
+            "version": "[2.8.2, )"
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",

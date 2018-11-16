@@ -95,7 +95,7 @@ namespace RSA_Web.Controllers
         /// Запуск работы алгоритма RSA
         /// </summary>
         /// <returns>Экстремум, Лучший шаг, Список направлений, Все шаги</returns>
-        [HttpGet("/Start")]
+        [HttpGet("/Solution")]
         public IActionResult Start()
         {
             return PartialView("Result", (ResultView)RSAService.StartAlghoritmRSA());
