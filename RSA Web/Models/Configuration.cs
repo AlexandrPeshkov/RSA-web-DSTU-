@@ -20,6 +20,8 @@ namespace RSA_Web.Models
 
         public uint DirectionsCount { get; set; }
 
+        public bool IsMinimization { get; set; }
+
         public List<double> ZeroPoint { get; set; }
 
         public Func<List<double>, double> Function { get; set; }
@@ -40,7 +42,7 @@ namespace RSA_Web.Models
                 MinZeroPointValue = Configuration.MinZeroPointValue,
                 StepSize = Configuration.StepSize,
                 DirectionsCount = Configuration.DirectionsCount,
-                IsMinimization = Configuration.ExtremumPredicate(double.MinValue, double.MaxValue)
+                IsMinimization = Configuration.IsMinimization
             };
         }
 
@@ -65,7 +67,8 @@ namespace RSA_Web.Models
                 DirectionsCount = ConfigurationView.DirectionsCount,
                 StepSize = ConfigurationView.StepSize,
                 FunctionArgumetnsCount = ConfigurationView.FunctionArgumetnsCount,
-                ExtremumPredicate = Predicate
+                ExtremumPredicate = Predicate,
+                IsMinimization = ConfigurationView.IsMinimization
             };
         }
     }

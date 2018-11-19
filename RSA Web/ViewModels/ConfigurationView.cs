@@ -10,30 +10,32 @@ namespace RSA_Web.ViewModels
     public class ConfigurationView
     {
         [Required]
-        [Display(Name = "Арность функции")]
+        [Display(Name = "Арность функции (N)")]
         public uint FunctionArgumetnsCount { get; set; }
 
         [Required]
-        [Display(Name ="Лимит шагов")]
+        [Display(Name ="Лимит шагов (K)")]
         [Range(0,10000)]
         public uint StepsLimit { get; set; }
 
         [Required]
-        [Display(Name = "Величина шага")]
+        [Display(Name = "Величина шага (h)")]
         public double StepSize { get; set; }
 
         [Required]
-        [Display(Name = "Нижний порог значений начальной точки")]
+        [Display(Name = "Нижний порог значений начальной точки (Xmin)")]
         public double MinZeroPointValue { get; set; }
 
         [Required]
-        [Display(Name = "Верхний порог значений начальной точки")]
+        [Display(Name = "Верхний порог значений начальной точки (Xmax)")]
         public double MaxZeroPointValue { get; set; }
 
         [Required]
-        [Display(Name = "Число направлений")]
+        [Display(Name = "Число направлений (M)")]
         public uint DirectionsCount { get; set; }
 
+        [Required]
+        [Display(Name = "Задача минимизации")]
         public bool IsMinimization { get; set; }
     }
 }

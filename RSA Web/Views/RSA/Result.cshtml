@@ -12,8 +12,12 @@
 
     @Html.Partial("Partial/_Directions", Model?.Directions)
 
-    @Html.Partial("Partial/_Steps", Model.Steps)
-
+    <label class="control-label font-weight-bold"> Найденный экстремум </label>
     @Html.Partial("Partial/_Step", Model.BestSolution)
+
+    <form>
+        <label class="control-label font-weight-bold"> Шаги</label>
+        @Html.Partial("Partial/_Steps", Model.Steps)
+    </form>
 }
 

@@ -15,6 +15,8 @@ namespace RSA_Web.Services
 
         private IServiceDirection DirectionService { get; set; }
 
+        private bool IsMinimization { get; set; }
+
         public RSAConfigurationService(IServiceDirection DirectionService)
         {
 
@@ -23,11 +25,12 @@ namespace RSA_Web.Services
             DefaultConfiguration = new Configuration()
             {
                 FunctionArgumetnsCount = 2,
-                StepsLimit = 300,
-                MaxZeroPointValue = 10,
-                MinZeroPointValue = -10,
+                StepsLimit = 100,
+                MaxZeroPointValue = 2,
+                MinZeroPointValue = -2,
                 StepSize = 0.1,
                 DirectionsCount = 10,
+                IsMinimization = true,
 
                 ZeroPoint = new double[2].ToList(),
 
@@ -38,7 +41,7 @@ namespace RSA_Web.Services
 
                 EvaluateSolutionQuality = (Step CurrentStep, double? CurrentExtremum) =>
                 {
-                    return (CurrentExtremum == null || this.DefaultConfiguration.ExtremumPredicate(CurrentStep.FunctionValue, CurrentExtremum));
+                    return (CurrentExtremum == null || this.CurrentConfiguration.ExtremumPredicate(CurrentStep.FunctionValue, CurrentExtremum));
                 },
 
                 IsStop = (Step CurrentStep) =>
@@ -51,7 +54,14 @@ namespace RSA_Web.Services
 
                 ExtremumPredicate = (double? left, double? right) =>
                 {
-                    return left < right;
+                    if (IsMinimization)
+                    {
+                        return left < right;
+                    }
+                    else
+                    {
+                        return left > right;
+                    }
                 }
             };
 

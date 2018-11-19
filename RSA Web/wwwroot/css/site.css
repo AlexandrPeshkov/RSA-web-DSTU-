@@ -18,16 +18,15 @@ form{
 
 details{
     margin-top: 10px;
-    /* background-color: rgb(195, 228, 240); */
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     display: flex;
     justify-items: center;
+    margin-left: 15px;
 }
 
 summary{
     text-indent: 10px;
-    /* background-color: rgb(75, 148, 177); */
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     margin-bottom: 1rem;
@@ -54,7 +53,7 @@ summary{
 }
 
 .direction :nth-child(1){
-    width: 10%;
+    width: 15%;
     text-align: center;
 }
 

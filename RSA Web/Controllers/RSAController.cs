@@ -27,6 +27,7 @@ namespace RSA_Web.Controllers
         [HttpGet("/")]
         public IActionResult Init()
         {
+
             return PartialView("Configuration", (ConfigurationView)RSAService.CurrentConfiguration);
         }
 
@@ -43,7 +44,7 @@ namespace RSA_Web.Controllers
                 RSAService.SetConfiguration(configuration);
                 return RedirectToAction("StartPoint");
             }
-            return View("Configuration", RSAService.DefaultConfiguration);
+            return View("Configuration", RSAService.CurrentConfiguration);
         }
 
         /// <summary>

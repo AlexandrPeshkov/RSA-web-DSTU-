@@ -139,7 +139,7 @@ namespace RSA_Web.Services
             CurrentStep.IsGoodSolution = ConfigurationService.CurrentConfiguration.EvaluateSolutionQuality(CurrentStep, CurrentExtremum);
             CurrentStep.IsFinalStep = ConfigurationService.CurrentConfiguration.IsStop(CurrentStep);
 
-            if (BestSolution == null || CurrentStep < BestSolution)
+            if (BestSolution == null || ConfigurationService.CurrentConfiguration.ExtremumPredicate(CurrentStep.FunctionValue, CurrentExtremum))
             {
                 BestSolution = CurrentStep;
                 CurrentExtremum = CurrentStep.FunctionValue;

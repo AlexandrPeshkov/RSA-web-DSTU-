@@ -11,14 +11,5 @@
 
     @Html.Partial("Partial/_Configuration", Model)
 
-
-    <div class="anil_nepal form-group">
-        <label class="switch switch-left-right">
-            @Html.CheckBoxFor(model => model.IsMinimization, new { @class = "switch-input", @data_toggle = "toggle" })
-            <span class="switch-label" data-on="Min" data-off="Max"></span>
-            <span class="switch-handle"></span>
-        </label>
-    </div>
-
     @Html.Partial("Partial/_Buttons", new ButtonsView(Buttons.ApplyButton))
 }
