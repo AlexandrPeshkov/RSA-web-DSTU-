@@ -25,11 +25,11 @@ namespace RSA_Web.Services
             DefaultConfiguration = new Configuration()
             {
                 FunctionArgumetnsCount = 2,
-                StepsLimit = 100,
-                MaxZeroPointValue = 2,
+                StepsLimit = 300,
+                MaxZeroPointValue = 0,
                 MinZeroPointValue = -2,
-                StepSize = 0.1,
-                DirectionsCount = 10,
+                StepSize = 0.05,
+                DirectionsCount = 100,
                 IsMinimization = true,
 
                 ZeroPoint = new double[2].ToList(),

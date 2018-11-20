@@ -12290,11 +12290,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\OneDrive\\Study\\Code\\DSTU\\Информационные методы и средства инженерии программного обеспечения\\RSA Web\\RSA Web\\RSA Web.csproj",
+      "projectUniqueName": "D:\\OneDrive\\Study\\Информационные методы и средства инженерии программного обеспечения\\RSA Web\\RSA Web\\RSA Web.csproj",
       "projectName": "RSA Web",
-      "projectPath": "D:\\OneDrive\\Study\\Code\\DSTU\\Информационные методы и средства инженерии программного обеспечения\\RSA Web\\RSA Web\\RSA Web.csproj",
+      "projectPath": "D:\\OneDrive\\Study\\Информационные методы и средства инженерии программного обеспечения\\RSA Web\\RSA Web\\RSA Web.csproj",
       "packagesPath": "C:\\Users\\a.peshkov\\.nuget\\packages\\",
-      "outputPath": "D:\\OneDrive\\Study\\Code\\DSTU\\Информационные методы и средства инженерии программного обеспечения\\RSA Web\\RSA Web\\obj\\",
+      "outputPath": "D:\\OneDrive\\Study\\Информационные методы и средства инженерии программного обеспечения\\RSA Web\\RSA Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
